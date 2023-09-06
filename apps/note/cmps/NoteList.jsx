@@ -8,17 +8,15 @@ export function NoteList({ notes, onRemoveNote }) {
             <div>note list</div>
             {notes.map(note =>
                 <article key={note.id}>
-                    <NotePreview note={note.info.txt}/>
+                    <NotePreview note={note}/>
                     <section>
+
                         <button onClick={() => onRemoveNote(note.id)}>delete</button>
                     </section>
 
 
-
                 </article>
             )}
-
         </main>
-
     )
 }
