@@ -6,7 +6,9 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    getTimeFromStamp,
 }
+
 
 function makeId(length = 6) {
     var txt = ''
@@ -54,9 +56,52 @@ function getDayName(date, locale) {
 }
 
 
+
 function getMonthName(date) {
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ]
     return monthNames[date.getMonth()]
+}
+
+function getTimeFromStamp(timestamp) {
+    const days = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    ]
+    const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ]
+    const date = new Date(timestamp)
+    const time =
+        timeFormat(date.getHours()) + ':' + timeFormat(date.getMinutes())
+    const currTimestamp = Date.now()
+    const currDate = new Date(currTimestamp)
+    const day = 1000 * 60 * 60 * 24
+    if (currTimestamp - timestamp < day) return 'Today ' + time
+    if (currTimestamp - timestamp < day * 2) return 'Yesterday ' + time
+    if (currTimestamp - timestamp < day * 7) return days[date.getDay()]
+    if (currDate.getFullYear() !== date.getFullYear())
+        return months[date.getMonth()].slice(0, 3) + ' ' + date.getFullYear()
+    return date.getDate() + ' ' + months[date.getMonth()].slice(0, 3)
+}
+
+function timeFormat(time) {
+    return time < 10 ? '0' + time : time
 }
