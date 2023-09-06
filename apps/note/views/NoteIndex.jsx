@@ -30,11 +30,17 @@ export function NoteIndex() {
     //     setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     // }
 
+    function onAddNote(){
+        console.log('add note')
+    }
+
     console.log('render')
     if (!notes) return <div>Loading...</div>
     return (
         <section className="note-index">
-            <div>note app</div>
+            <div onClick={onAddNote} className="add-note">Take a note...
+                <input type="checkbox"      />
+            </div>
             <NoteList notes={notes} onRemoveNote={onRemoveNote} />
 
         </section>

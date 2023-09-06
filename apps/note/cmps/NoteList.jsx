@@ -5,17 +5,13 @@ import { NotePreview } from "./NotePreview.jsx"
 export function NoteList({ notes, onRemoveNote }) {
     return (
         <main className="main-notes">
-            <div>note list</div>
             {notes.map(note =>
-                <article key={note.id}>
-                    <NotePreview note={note}/>
-                    <section>
-
-                        <button onClick={() => onRemoveNote(note.id)}>delete</button>
-                    </section>
-
-
-                </article>
+                <section className="notes" key={note.id}>
+                    <NotePreview note={note} />
+                    <button onClick={() => onRemoveNote(note.id)}>delete</button>
+                    <button onClick={() => onChangeBcg(note.id)}>bcg</button>
+                    <button onClick={() => onPinToTop(note.id)}>Pin</button>
+                </section>
             )}
         </main>
     )
