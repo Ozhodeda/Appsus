@@ -7,7 +7,6 @@ const { useState } = React
 
 
 export function NotePreview({ note }) {
-    console.log('1' ,note);
 
     // function handleChange({ target }) {
     //     console.log('2', target);
