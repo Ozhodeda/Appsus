@@ -1,4 +1,5 @@
 import { NotePreview } from "./NotePreview.jsx"
+import { NoteEdit } from "../views/NoteEdit.jsx"
 // const { Link } = ReactRouterDOM
 
 
@@ -11,6 +12,7 @@ export function NoteList({ notes, onRemoveNote }) {
                     <button onClick={() => onRemoveNote(note.id)}>delete</button>
                     <button onClick={() => onChangeBcg(note.id)}>bcg</button>
                     <button onClick={() => onPinToTop(note.id)}>Pin</button>
+                    <button onClick={NoteEdit.CloseClicked}>Close</button>
                 </section>
             )}
         </main>

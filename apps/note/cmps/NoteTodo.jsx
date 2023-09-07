@@ -5,7 +5,7 @@ export function NoteTodo({ note }) {
     let key = 101
     return (
         <ul>
-            <h4>{title}</h4>
+            <h4 suppressContentEditableWarning={true} contentEditable="true">{title}</h4>
             {todos.map(todo =>
                 <li key={note.id + key++}>
                     {todo.txt} <input className="checkbox" type="checkbox" />
