@@ -1,0 +1,49 @@
+.mail-folder-list-container {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100%;
+    width: 40px;
+    background-color: #f6f8fc;
+    z-index: 2;
+}
+
+.mail-folder-list-container:hover {
+    transition: all 250ms;
+    width: 150px;
+}
+
+.mail-folder-list-container:hover .compose-mail::after {
+    content: ' Compose';
+}
+
+.mail-folder-list-container:hover .mail-inbox::after {
+    content: ' Inbox';
+}
+
+.mail-folder-list-container:hover .mail-star::after {
+    content: ' Starred';
+}
+
+.mail-folder-list-container:hover .mail-important::after {
+    content: ' Important';
+}
+
+.mail-folder-list-container:hover .mail-sent::after {
+    content: ' Sent';
+}
+
+.mail-folder-list-container:hover .mail-draft::after {
+    content: ' Draft';
+}
+
+.mail-folder-list-container:hover .mail-trash::after {
+    content: ' Trash';
+}
+
+.compose-mail{
+    background-color: #C2E7FF;
+    border-radius: 16px;
+    height: 56px;
+    width: 56px;
+}

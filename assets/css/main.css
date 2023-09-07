@@ -7,6 +7,7 @@
 
 @import './basics/base.css';
 @import './basics/helpers.css';
+@import'./basics/loader.css';
 /* @import './basics/layout.css'; */
 
 /* Views */
@@ -25,4 +26,8 @@
 /* @import './apps/mail/cmps/MailList.css'; */
 
 /* Notes cmps */
-@import './apps/note/cmps/NoteList.css'
+@import './apps/note/cmps/NoteList.css';
+
+
+/* Mails cmps */
+@import'./apps/mail/cmps/MailFolderList.css'

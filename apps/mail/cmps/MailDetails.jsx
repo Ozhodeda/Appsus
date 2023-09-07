@@ -1,9 +1,10 @@
 import { mailService } from "../services/mail.service.js";
+import { MailAction } from "./MailAction.jsx";
 
 const { useEffect, useState } = React
 const { useParams, useNavigate } = ReactRouterDOM
 
-export function MailDetails({ onRemoveMail }) {
+export function MailDetails({onRemoveMail} ) {
     const [mail, setMail] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
@@ -26,7 +27,7 @@ export function MailDetails({ onRemoveMail }) {
         navigate('/mail')
     }
 
-    if (!mail) return <div>Loading...</div>
+    if (!mail) return (<div className='loader-container'> <div className="loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>)
     return (
         <section className='mail-details'>
             <table className="email-details-tools">
@@ -35,7 +36,12 @@ export function MailDetails({ onRemoveMail }) {
                         <button className="details-back" onClick={onBack}>
                             <i className="fa-solid fa-arrow-left"></i>
                         </button>
+                        <MailAction
+                         mailId={mail.id}
+                        onRemoveMail={onRemoveMail}
+                        />
                     </tr>
+                    
                 </tbody>
             </table>
             <div className="email-details-content">
