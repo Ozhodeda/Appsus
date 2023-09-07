@@ -1,0 +1,22 @@
+.mail-filter {
+    display: flex;
+    justify-content: start;
+    padding-block: 10px;
+    padding-inline: 10px;
+    background-color: #f6f8fc;
+    border-block-start: 1px  #e0e0e0 solid;
+}
+
+.mail-filter > * {
+    margin-inline-end: 20px;
+    font-size: 1rem;
+    padding-inline: 20px;
+    padding-block: 5px;
+    border-radius: 25px;
+    border: 1px solid  #e0e0e0;
+    background-color: transparent;
+    flex: 0 1 auto;
+}
+.mail-filter :last-child {
+    margin-inline-end: 0;
+}

@@ -23,11 +23,12 @@
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';
 
-/* @import './apps/mail/cmps/MailList.css'; */
 
 /* Notes cmps */
 @import './apps/note/cmps/NoteList.css';
 
 
 /* Mails cmps */
-@import'./apps/mail/cmps/MailFolderList.css'
+@import './apps/mail/cmps/MailList.css';
+@import'./apps/mail/cmps/MailFolderList.css';
+@import'./apps/mail/cmps/MailFilter.css';
