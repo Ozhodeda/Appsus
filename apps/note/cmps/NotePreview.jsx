@@ -7,28 +7,27 @@ const { useState } = React
 
 
 export function NotePreview({ note }) {
-    console.log('1' ,note);
 
-    function handleChange({ target }) {
-        console.log('2', target);
-        const field = target.name
-        let value = target.value
-        switch (target.type) {
-            case 'number':
-            case 'range':
-                value = +value || ''
-                break;
-            case 'checkbox':
-                value = target.checked
-                break
-            case 'select':
-                value = target.selection
-                break
-            default:
-                break;
-        }
-        setReview(prevReview => ({ ...prevReview, [field]: value }))
-    }
+    // function handleChange({ target }) {
+    //     console.log('2', target);
+    //     const field = target.name
+    //     let value = target.value
+    //     switch (target.type) {
+    //         case 'number':
+    //         case 'range':
+    //             value = +value || ''
+    //             break;
+    //         case 'checkbox':
+    //             value = target.checked
+    //             break
+    //         case 'select':
+    //             value = target.selection
+    //             break
+    //         default:
+    //             break;
+    //     }
+    //     setReview(prevReview => ({ ...prevReview, [field]: value }))
+    // }
 
 
 
@@ -46,11 +45,5 @@ export function NotePreview({ note }) {
         }
     }
 
-    return (
-        <article className="note-preview">
-            <h2>Note Info: {note.info.txt}</h2>
-           
-                <DynamicCmp handleChange={handleChange}  />
-        </article>
-    )
+    return <DynamicCmp note={note} />
 }
