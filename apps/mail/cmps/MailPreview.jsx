@@ -1,7 +1,11 @@
-// import{utilService} from '../../../services/util.service/js'
-export function MailPreview({mail}){
-    // const {useState} = React
+import { utilService } from '../../../services/util.service/js'
 
+const { useState } = React
+const { useNavigate } = ReactRouterDOM
+
+export function MailPreview({ mail}) {
+
+    const navigate = useNavigate()
     // const [isHovered, setIsHovered] = useState(false)
     // const handleMouseEnter = () => setIsHovered(true)
     // const handleMouseLeave = () => setIsHovered(false)
@@ -42,21 +46,22 @@ export function MailPreview({mail}){
             return months[date.getMonth()].slice(0, 3) + ' ' + date.getUTCFullYear()
         return date.getDate() + ' ' + months[date.getMonth()].slice(0, 3)
     }
-    
+
     function timeFormat(time) {
         return time < 10 ? '0' + time : time
     }
 
-console.log('mail',mail);
-    return <tr>
-       <td className='mail-checkbox'>
-        <input type="checkbox"  />
-       </td>
+    console.log('mail', mail);
+    return <tr
+        onClick={() => navigate(`/mail/${mail.id}`) }>
+        <td className='mail-checkbox'>
+            <input type="checkbox" />
+        </td>
         <td className='mail-stars'>
-        <i className="fa-regular fa-star" ></i>
+            <i className="fa-regular fa-star" ></i>
         </td>
         <td>
-        <i className="fa-regular fa-bookmark fa-rotate-270"></i>
+            <i className="fa-regular fa-bookmark fa-rotate-270"></i>
         </td>
         <td className="mail-from">{mail.from} </td>
         <td className="mail-subject">{mail.subject} </td>
