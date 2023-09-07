@@ -31,6 +31,7 @@ function query(filterBy = {}) {
 }
 
 function get(noteId) {
+    console.log('noteId', noteId)
     return storageService.get(NOTE_KEY, noteId)
     // .then(note => {
     //     note = _setNextPrevNoteId(note)
@@ -56,7 +57,7 @@ function setFilterBy(filterBy = {}) {
     return filterBy
 }
 
-function getEmptyNote(id = '', type = '', info = {}) {
+function getEmptyNote(id = '', type = 'NoteTxt', info = {}) {
     return {
         id,
         type,
@@ -86,6 +87,7 @@ function _createNotes() {
                     backgroundColor: '#00d'
                 },
                 info: {
+                    title: 'title',
                     txt: 'Fullstack Me Baby! Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby! '
                 }
             },

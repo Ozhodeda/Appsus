@@ -3,22 +3,22 @@ import { NoteList } from "../cmps/NoteList.jsx"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import { NoteEdit } from "./NoteEdit.jsx"
 
-import useOutsideClick from "../../../hooks/use-out-side-click.js"
+// import useOutsideClick from "../../../hooks/use-out-side-click.js"
 
-const { useState, useEffect, useRef } = React
+const { useState, useEffect/*, useRef*/ } = React
 const { Link } = ReactRouterDOM
 
 export function NoteIndex() {
 
     const [notes, setNotes] = useState(null)
-    const [isExpanded, setIsExpanded] = useState(false)
+    // const [isExpanded, setIsExpanded] = useState(false)
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
-    const noteEditRef = useRef()
+    // const noteEditRef = useRef()
 
-    useOutsideClick(noteEditRef, () => {
-        console.log('out side click')
-        setIsExpanded(false)
-    })
+    // useOutsideClick(noteEditRef, () => {
+    //     console.log('out side click')
+    //     setIsExpanded(false)
+    // })
 
     useEffect(() => {
         console.log('mount')
@@ -48,7 +48,7 @@ export function NoteIndex() {
     if (!notes) return <div>Loading...</div>
     return (
         <main className="note-index">
-            <div className="add-note" ref={noteEditRef}>
+            {/* <div className="add-note" ref={noteEditRef}>
                 <h4 hidden={!isExpanded} className="note-title" ><input placeholder="Title" type="text" /></h4>
                 <div onClick={() => {
                     setIsExpanded(true)
@@ -56,7 +56,8 @@ export function NoteIndex() {
                 <footer hidden={!isExpanded} className="note-footer" >
                     <button>Todo</button> <button>noteImg</button> <button>Close</button>
                 </footer>
-            </div>
+            </div> */}
+            <NoteEdit />
             <NoteList notes={notes} onRemoveNote={onRemoveNote} />
         </main>
     )
