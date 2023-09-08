@@ -1,10 +1,10 @@
-import { utilService } from '../../../services/util.service/js'
+// import { utilService } from '../../../services/util.service/js'
 import { MailAction } from './MailAction.jsx'
 
-const { useState } = React
+// const { useState } = React
 const { useNavigate } = ReactRouterDOM
 
-export function MailPreview({ mail, onRemoveMail }) {
+export function MailPreview({ mail, onRemoveMail,onMarkUnread }) {
 
     const navigate = useNavigate()
     // const [isHovered, setIsHovered] = useState(false)
@@ -72,6 +72,7 @@ export function MailPreview({ mail, onRemoveMail }) {
             <MailAction
                 mailId={mail.id}
                 onRemoveMail={onRemoveMail}
+                onMarkUnread={onMarkUnread}
             />
             <td className="mail-date">{getTimeFromStamp(mail.sentAt)} </td>
         </tr>

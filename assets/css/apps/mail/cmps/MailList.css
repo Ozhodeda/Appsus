@@ -17,18 +17,14 @@ table {
  }
 
  td {
-     padding: 10px;
+     padding: 7px;
  }
 
  .mail-checkbox input[type="checkbox"] {
      margin: 0;
  }
 
- .mail-stars i,
- .fa-rotate-90 {
-     font-size: 18px;
-     margin-right: 10px;
- }
+
 
  .mail-from {
      font-weight: bold;

@@ -13,7 +13,9 @@ export const mailService = {
     save,
     getEmptyMail,
     getDefaultFilter,
-    getDefaultSort
+    getDefaultSort,
+    setReadMail,
+    setUnReadMail
 }
 
 function query(filterBy = {}, sortBy = {}) {
@@ -90,6 +92,20 @@ function save(mail) {
     } else {
         return storageService.post(MAIL_KEY, mail)
     }
+}
+
+function setReadMail(mailId) {
+    return storageService.get(MAIL_KEY, mailId).then((mail) => {
+        mail.isRead = true
+        return storageService.put(MAIL_KEY, mail)
+    })
+}
+
+function setUnReadMail(mailId) {
+    return storageService.get(MAIL_KEY, mailId).then((mail) => {
+        mail.isRead = false
+        return storageService.put(MAIL_KEY, mail)
+    })
 }
 
 
