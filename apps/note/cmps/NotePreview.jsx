@@ -3,36 +3,10 @@ import { NoteImg } from "./NoteImg.jsx"
 import { NoteVideo } from "./NoteVideo.jsx"
 import { NoteTodo } from "./NoteTodo.jsx"
 
-const { useState } = React
-
-
-export function NotePreview({ note }) {
-
-    // function handleChange({ target }) {
-    //     console.log('2', target);
-    //     const field = target.name
-    //     let value = target.value
-    //     switch (target.type) {
-    //         case 'number':
-    //         case 'range':
-    //             value = +value || ''
-    //             break;
-    //         case 'checkbox':
-    //             value = target.checked
-    //             break
-    //         case 'select':
-    //             value = target.selection
-    //             break
-    //         default:
-    //             break;
-    //     }
-    //     setReview(prevReview => ({ ...prevReview, [field]: value }))
-    // }
-
-
+export function NotePreview({ note, onContentEdit }) {
 
     function DynamicCmp(props) {
-        console.log(props);
+        // console.log(props);
         switch (note.type) {
             case 'NoteTxt':
                 return <NoteTxt {...props} />
@@ -44,6 +18,5 @@ export function NotePreview({ note }) {
                 return <NoteTodo {...props} />
         }
     }
-
-    return <DynamicCmp note={note} />
+    return <DynamicCmp note={note} onContentEdit={onContentEdit} />
 }

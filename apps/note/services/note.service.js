@@ -1,5 +1,3 @@
-// note service
-// import { utilService } from "../../../services/util.service.js"
 import { storageService } from "../../../services/async-storage.service.js"
 
 const NOTE_KEY = 'keep_DB'
@@ -31,7 +29,7 @@ function query(filterBy = {}) {
 }
 
 function get(noteId) {
-    console.log('noteId', noteId)
+    console.log('noteId get', noteId)
     return storageService.get(NOTE_KEY, noteId)
     // .then(note => {
     //     note = _setNextPrevNoteId(note)
@@ -44,6 +42,7 @@ function remove(noteId) {
 }
 
 function save(note) {
+    console.log(' save note', note)
     if (note.id) {
         return storageService.put(NOTE_KEY, note)
     } else {
@@ -63,15 +62,26 @@ function getEmptyNote(id = '', type = 'NoteTxt', info = {}) {
         type,
         isPinned: false,
         style: {
-            backgroundColor: '#00d'
+            backgroundColor: 'rgb(255, 255, 255)'
         },
-        info
+        info:{
+            txt: '',
+            title: ''
+        }
     }
 }
 
 function getDefaultFilter() {
     return { info: { txt: '' }, isPinned: false }
 }
+
+// function changeBcgColor(noteId){
+//    return get(noteId)
+//     .then ((note) => {
+//         note.style.backgroundColor = 
+//     })
+
+// }
 
 
 function _createNotes() {
@@ -84,7 +94,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 style: {
-                    backgroundColor: '#00d'
+                    backgroundColor: 'rgb(255, 255, 255)'
                 },
                 info: {
                     title: 'title',
@@ -100,7 +110,7 @@ function _createNotes() {
                     title: 'Bobi and Me'
                 },
                 style: {
-                    backgroundColor: '#00d'
+                    backgroundColor: 'rgb(255, 255, 255)'
                 }
             },
             {
@@ -112,9 +122,15 @@ function _createNotes() {
                     todos: [
                         { txt: 'Driving license', doneAt: null },
                         { txt: 'Coding power', doneAt: 187111111 }
-                    ]
+                    ],
+                style:{
+                    backgroundColor: 'rgb(255, 255, 255)'
+                }
                 }
             }
         ]
     storageService.saveToStorage(NOTE_KEY, notes)
 }
+
+
+

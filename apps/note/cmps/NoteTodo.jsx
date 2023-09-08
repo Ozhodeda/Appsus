@@ -1,7 +1,7 @@
 export function NoteTodo({ note }) {
-    console.log('NoteTodo')
+    // console.log('NoteTodo')
     const { title, todos } = note.info
-    console.log('title', title)
+    // console.log('title', title)
     let key = 101
     return (
         <ul>
