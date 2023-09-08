@@ -58,11 +58,35 @@ export function MailPreview({ mail, onRemoveMail,onMarkUnread }) {
             <td className='mail-checkbox'>
                 <input type="checkbox" />
             </td>
-            <td className='mail-stars'>
-                <i className="fa-regular fa-star" ></i>
+            <td className="mail-star">
+                <button onClick={(event) => onStarMail(event, mail.id)}>
+                    {mail.isStarred ? (
+                        <i
+                            className="fa-solid fa-star"
+                            style={{ color: '#fbbc04' }}
+                        ></i>
+                    ) : (
+                        <i
+                            className="fa-regular fa-star"
+                            style={{ color: '#6b6b6b' }}
+                        ></i>
+                    )}
+                </button>
             </td>
-            <td>
-                <i className="fa-regular fa-bookmark fa-rotate-90"></i>
+            <td className="mail-important">
+                <button onClick={(event) => onImportantMail(event, mail.id)}>
+                    {mail.isImportant ? (
+                        <i
+                            className="fa-regular fa-bookmark fa-rotate-90"
+                            style={{ color: '#fbbc04' }}
+                        ></i>
+                    ) : (
+                        <i
+                            className="fa-regular fa-bookmark fa-rotate-90"
+                            style={{ color: '#6b6b6b' }}
+                        ></i>
+                    )}
+                </button>
             </td>
             <div onClick={() => navigate(`/mail/${mail.id}`)}>
                 <td className="mail-from">{mail.from} </td>

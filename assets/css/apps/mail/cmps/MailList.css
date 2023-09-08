@@ -28,14 +28,25 @@ table {
 
  .mail-from {
      font-weight: bold;
+     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
  }
 
  .mail-subject {
      font-weight: bold;
      color: #333;
+     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
  }
  .mail-body {
     color: #888;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-basis: 80%;
+    margin-inline-end: 20px;
 }
 tr:hover {
     /* background-color: #f0f0f0; */

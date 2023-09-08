@@ -56,15 +56,15 @@ export function MailIndex() {
         setSortBy((prevSortBy) => ({ ...prevSortBy, ...sortBy }))
     }
 
-    // function onMarkUnRead(ev,mailId) {
-    //     {console.log(ev)}
-    //     console.log('knmvk')
-    //     if(!ev||!mailId) return
-    //     mailService.setUnReadMail(mailId).then(loadMails)
-    //     .then(() => {showSuccessMsg('Mail marked as unread')}).catch((error) => {
-    //         console.error('Failed to mark unread:', error)
-    //     })
-    // }
+    function onMarkUnRead(ev,mailId) {
+        {console.log(ev)}
+        console.log('knmvk')
+        if(!ev||!mailId) return
+        mailService.setUnReadMail(mailId).then(loadMails)
+        .then(() => {showSuccessMsg('Mail marked as unread')}).catch((error) => {
+            console.error('Failed to mark unread:', error)
+        })
+    }
 
 
     if (!mails) return (<div className='loader-container'> <div className="loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>)
@@ -93,7 +93,7 @@ export function MailIndex() {
                             filterBy={filterBy}
                             onSetSortBy={onSetSortBy}
                             sortBy={sortBy}
-                            // onMarkUnRead={onMarkUnRead} 
+                            onMarkUnRead={onMarkUnRead} 
                             />
                     </div>)}
             </main>
