@@ -6,12 +6,12 @@ import { NoteEdit } from "./NoteEdit.jsx"
 // import useOutsideClick from "../../../hooks/use-out-side-click.js"
 
 const { useState, useEffect/*, useRef*/ } = React
-const { Link } = ReactRouterDOM
+const { useNavigate } = ReactRouterDOM
 
 export function NoteIndex() {
 
     const [notes, setNotes] = useState(null)
-    // const [isExpanded, setIsExpanded] = useState(false)
+    // const navigate = useNavigate()
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
     // const noteEditRef = useRef()
 
@@ -36,29 +36,48 @@ export function NoteIndex() {
             })
     }
 
+    function onContentEdit({ target }, id) {
+        noteService.get(id).then((note) => {
+            note.info.title = target.innerText
+            noteService.save(note)
+            console.log('noe on content ',note)
+        })
+
+
+        // change title to target.innerText
+        // save note
+        // update notes
+        console.dir(target.innerText)
+    }
+
     // function onSetFilterBy(filterBy) {
     //     setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     // }
+
+    // noteService.get(id).then((note) => {
+    //     note.info.title = target.innerText
+    //     onSaveNote(note)
+    //         .then(() => {
+    //             navigate('/note')
+    //             showSuccessMsg(`Added/Edited successfully! ${NoteToEdit.id}`)
+    //         })
+    //         .catch(err => {
+    //             console.log('err:onContentEdit', err)
+    //             showErrorMsg('Problem Adding/Editing ' + NoteToEdit.id)
+    //         })
+
+    // })
 
     // function onAddNote() {
     //     console.log('add note')
     // }
 
     console.log('render')
-    if (!notes) return <div>Loading...</div>
+    if (!notes) return <div className='loader-container'> <div className="loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
     return (
         <main className="note-index">
-            {/* <div className="add-note" ref={noteEditRef}>
-                <h4 hidden={!isExpanded} className="note-title" ><input placeholder="Title" type="text" /></h4>
-                <div onClick={() => {
-                    setIsExpanded(true)
-                }} ><input placeholder="Take a note..." type="text" /></div>
-                <footer hidden={!isExpanded} className="note-footer" >
-                    <button>Todo</button> <button>noteImg</button> <button>Close</button>
-                </footer>
-            </div> */}
-            <NoteEdit />
-            <NoteList notes={notes} onRemoveNote={onRemoveNote} />
+            <NoteEdit notes={notes} />
+            <NoteList notes={notes} onRemoveNote={onRemoveNote} onContentEdit={onContentEdit} />
         </main>
     )
 }

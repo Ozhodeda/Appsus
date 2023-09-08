@@ -13,40 +13,40 @@ export function NoteEdit() {
 
     const navigate = useNavigate()
     const params = useParams()
-    const noteEditRef = useRef()///
+    const noteEditRef = useRef()
 
     useOutsideClick(noteEditRef, () => {
-        console.log('out side click')
+        onSaveNote()
         setIsExpanded(false)
         
     })
 
 
     useEffect(() => {
-        console.log('*/*/*/*/*/*/*/*/',params.noteId);
+        // console.log('*/*/*/*/*/*/*/*/',params.noteId)
         if (params.noteId) loadNote()
     }, [])
 
     function loadNote() {
         noteService.get(params.noteId)
             .then(setNoteToEdit)
-            .catch(err => console.log('err:', err))
+            .catch(err => console.log('err: loadNote', err))
     }
 
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
-        console.log('888', value)
+        // console.log('888', value)
 
         const info = { ...NoteToEdit.info}
-        console.log('a*************************',NoteToEdit)
+        // console.log('a*************************',NoteToEdit)
         info[field] = value
         setNoteToEdit(prevNoteToEdit => ({ ...prevNoteToEdit, info: info}))
 
     }
 
     function onSaveNote(ev) {
-        ev.preventDefault()
+        if (ev) ev.preventDefault()
         noteService.save(NoteToEdit)
             .then(() => {
                 navigate('/note')
@@ -70,7 +70,8 @@ export function NoteEdit() {
         <section className="note-edit">
             <div>
                 <div className="add-note"  ref={noteEditRef }>
-                    <h4 hidden={!isExpanded} className="note-title" ><input onChange={handleChange} placeholder="Title" type="text" value ={title} name="title" /></h4>
+                    <h4 hidden={!isExpanded} className="note-title" 
+                    ><input onChange={handleChange} placeholder="Title" type="text" value ={title} name="title" /></h4>
                     <div onClick={() => {
                         setIsExpanded(true)
                     }} ><input onChange={handleChange} placeholder="Take a note..." 
