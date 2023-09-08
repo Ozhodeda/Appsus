@@ -1,22 +1,29 @@
 import { mailService } from '../../mail/services/mail.service.js';
 import { MailList } from '../cmps/MailList.jsx';
+import { MailDetails } from '../cmps/MailDetails.jsx';
+import { MailFolderList } from '../cmps/MailFolderList.jsx';
+import { MailHeader } from '../cmps/MailHeader.jsx';
+
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
+const { useParams } = ReactRouterDOM
 // const { Link } = ReactRouterDOM
 
 
 export function MailIndex() {
-    const [mails, setMails] = useState(null)
+    const [mails, setMails] = useState([])
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
-
+    const [sortBy, setSortBy] = useState(mailService.getDefaultSort())
+    const params = useParams()
     useEffect(() => {
         console.log('mount')
         mailService.query(filterBy).then(setMails)
-        // mailService.query().then(setMails)
-        .catch(err => console.log('err:', err))
-       
+            // mailService.query().then(setMails)
+            .catch(err => console.log('err:', err))
+
     }, [filterBy])
+
 
     function onRemoveMail(mailId) {
         mailService.remove(mailId).then(() => {
@@ -29,21 +36,53 @@ export function MailIndex() {
             })
     }
 
+    function loadMails() {
+        mailService
+            .query(filterBy, sortBy)
+            .then((mails) => {
+                setMails(mails)
+            })
+            .catch((error) => {
+                console.error('Failed to load mails:', error)
+            })
+    }
 
-    // function onSetFilterBy(filterBy) {
-    //     // console.log('filterBy:', filterBy)
-    //     setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
-    // }
-    
-    if (!mails) return <div className='loader-container'> <div className="loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+    function onSetFilter(filterBy) {
+        setFilterBy((prevFilterBy) => ({ ...prevFilterBy, ...filterBy }))
+    }
+    function onSetSortBy(sortBy) {
+        setSortBy((prevSortBy) => ({ ...prevSortBy, ...sortBy }))
+    }
+
+
+    if (!mails) return (<div className='loader-container'> <div className="loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>)
     return (
         <div className='mail-app-container'>
+            <MailHeader onSetFilter={onSetFilter} filterBy={filterBy} />
             <main className='mail-app'>
-                <div className='mail-list-container'>
-                    <MailList mails={mails} onRemoveMail={onRemoveMail} />
-                </div>
+                <aside className='mail-folder-list-container'>
+                    <MailFolderList />
+                </aside>
+                {params && Object.keys(params).length > 0 ? (
+                    <MailDetails onRemoveMail={onRemoveMail} filterBy={filterBy} />) : (
+                    <div className='mail-list-container'>
+                        <MailList
+                            mails={mails}
+                            onRemoveMail={onRemoveMail}
+                            loadMails={loadMails}
+                            onSetFilter={onSetFilter}
+                            filterBy={filterBy}
+                            onSetSortBy={onSetSortBy}
+                            sortBy={sortBy} />
+                    </div>)}
             </main>
         </div>
     )
 }
 
+
+{/* <Routes>
+    <Route path="starred" element={<MailList type="starred" />} />
+    <Route path="sent" element={<MailList type="sent" />} />
+    <Route path="/note" element={<NoteIndex />} />
+</Routes> */}

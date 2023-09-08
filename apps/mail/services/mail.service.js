@@ -12,22 +12,68 @@ export const mailService = {
     remove,
     save,
     getEmptyMail,
-    getDefaultFilter
+    getDefaultFilter,
+    getDefaultSort
 }
 
-function query(filterBy = {}) {
+function query(filterBy = {}, sortBy = {}) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
-            if (filterBy.subject) {
-                const regex = new RegExp(filterBy.subject, 'i')
-                mails = mails.filter(mail => regex.test(mail.subject))
+            if (filterBy.searchFilter) {
+                const regExp = new RegExp(filterBy.searchFilter, 'i')
+                mails = mails.filter(
+                    (mail) =>
+                        regExp.test(mail.subject) ||
+                        regExp.test(mail.body) ||
+                        regExp.test(mail.from)
+                )
             }
-            if (filterBy.isRead) {
-                mails = mails.filter(mail => mail.isRead >= filterBy.isRead)
+            if (filterBy.readFilter === 'Read') {
+                mails = mails.filter((mail) => mail.isRead)
             }
+            if (filterBy.readFilter === 'Unread') {
+                mails = mails.filter((mail) => !mail.isRead)
+            }
+            if (filterBy.inbox === true) {
+                mails = mails.filter(
+                    (mail) =>
+                        mail.from !== loggedinUser.email &&
+                        !mail.isTrash &&
+                        !mail.isDraft
+                )
+            }
+            if (filterBy.starredMails === true) {
+                mails = mails.filter(
+                    (mail) => mail.isStarred &&
+                        !mail.isTrash &&
+                        !mail.isDraft
+                )
+            }
+            if (filterBy.importantMails === true) {
+                mails = mails.filter(
+                    (mail) => mail.isImportant &&
+                        !mail.isTrash &&
+                        !mail.isDraft
+                )
+            }
+            if (filterBy.sentMails === true) {
+                mails = mails.filter(
+                    (mail) =>
+                        mail.from === loggedinUser.email &&
+                        !mail.isTrash &&
+                        !mail.isDraft
+                )
+            }
+            if (filterBy.trashMails === true) {
+                mails = mails.filter((mail) => mail.isTrash && !mail.isDraft)
+            }
+            if (filterBy.draftMails === true) {
+                mails = mails.filter((mail) => mail.isDraft && !mail.isTrash)
+            }
+            if (sortBy.sortByDate) mails = _sortMails(mails, 'sortByDate')
+            else if (sortBy.sortByTitle) mails = _sortMails(mails, 'sortByTitle')
             return mails
         })
-
 }
 
 function get(mailId) {
@@ -46,10 +92,6 @@ function save(mail) {
     }
 }
 
-function getDefaultFilter() {
-    return { subject: '', body: '' }
-}
-
 
 function getEmptyMail() {
     return {
@@ -63,6 +105,14 @@ function getEmptyMail() {
     }
 }
 
+function getDefaultFilter() {
+    return {}
+}
+
+function getDefaultSort() {
+    return { sortByDate: true, sortByTitle: false}
+}
+
 function _createMails() {
     let mails = storageService.loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
@@ -74,7 +124,11 @@ function _createMails() {
             sentAt: 1551133930594,
             removedAt: null,
             from: 'oz360@gmail.com',
-            to: 'user@appsus.com'
+            to: 'user@appsus.com',
+            isStarred: true,
+            isImportant: false,
+            isDraft: false,
+            isTrash: false,
         },
         {
             id: 'e102',
@@ -84,7 +138,11 @@ function _createMails() {
             sentAt: 1551133930594,
             removedAt: null,
             from: 'momo@momo.com',
-            to: 'user@appsus.com'
+            to: 'user@appsus.com',
+            isStarred: true,
+            isImportant: false,
+            isDraft: false,
+            isTrash: false,
         },
         {
             id: 'e103',
@@ -94,7 +152,11 @@ function _createMails() {
             sentAt: new Date(),
             removedAt: null,
             from: 'Apple',
-            to: 'user@appsus.com'
+            to: 'user@appsus.com',
+            isStarred: true,
+            isImportant: false,
+            isDraft: false,
+            isTrash: false,
         }
         ]
         storageService.saveToStorage(MAIL_KEY, mails)
@@ -105,4 +167,17 @@ function _createMails() {
 const loggedinUser = {
     email: 'user@appsus.com',
     fullname: 'Mahatma Appsus'
+}
+
+function _sortMails(mails, sortBy) {
+    if (sortBy === 'sortByDate') {
+        const newMail = mails.sort(
+            (mailX, mailY) => mailY.sentAt - mailX.sentAt
+        )
+        return newMail
+    } else if (sortBy === 'sortByTitle') {
+        return mails.sort((mailX, mailY) =>
+            mailX.subject.localeCompare(mailY.subject)
+        )
+    } 
 }

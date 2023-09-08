@@ -1,9 +1,10 @@
 import { utilService } from '../../../services/util.service/js'
+import { MailAction } from './MailAction.jsx'
 
 const { useState } = React
 const { useNavigate } = ReactRouterDOM
 
-export function MailPreview({ mail}) {
+export function MailPreview({ mail, onRemoveMail }) {
 
     const navigate = useNavigate()
     // const [isHovered, setIsHovered] = useState(false)
@@ -52,20 +53,27 @@ export function MailPreview({ mail}) {
     }
 
     console.log('mail', mail);
-    return <tr
-        onClick={() => navigate(`/mail/${mail.id}`) }>
-        <td className='mail-checkbox'>
-            <input type="checkbox" />
-        </td>
-        <td className='mail-stars'>
-            <i className="fa-regular fa-star" ></i>
-        </td>
-        <td>
-            <i className="fa-regular fa-bookmark fa-rotate-270"></i>
-        </td>
-        <td className="mail-from">{mail.from} </td>
-        <td className="mail-subject">{mail.subject} </td>
-        <td className="mail-body">{mail.body} </td>
-        <td className="mail-date">{getTimeFromStamp(mail.sentAt)} </td>
-    </tr>
+    return (
+        <tr>
+            <td className='mail-checkbox'>
+                <input type="checkbox" />
+            </td>
+            <td className='mail-stars'>
+                <i className="fa-regular fa-star" ></i>
+            </td>
+            <td>
+                <i className="fa-regular fa-bookmark fa-rotate-90"></i>
+            </td>
+            <div onClick={() => navigate(`/mail/${mail.id}`)}>
+                <td className="mail-from">{mail.from} </td>
+                <td className="mail-subject">{mail.subject} </td>
+                <td className="mail-body">{mail.body} </td>
+            </div>
+            <MailAction
+                mailId={mail.id}
+                onRemoveMail={onRemoveMail}
+            />
+            <td className="mail-date">{getTimeFromStamp(mail.sentAt)} </td>
+        </tr>
+    )
 }
