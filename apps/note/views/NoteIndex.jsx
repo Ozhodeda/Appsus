@@ -36,9 +36,10 @@ export function NoteIndex() {
             })
     }
 
-    function onContentEdit({ target }, id) {
+    function onContentEdit({ target }, id, filed) {
         noteService.get(id).then((note) => {
-            note.info.title = target.innerText
+            console.log('adsdasdasd',filed);
+            note.info[filed] = target.innerText
             noteService.save(note)
             console.log('noe on content ',note)
         })

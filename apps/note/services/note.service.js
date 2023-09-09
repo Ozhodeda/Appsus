@@ -106,7 +106,7 @@ function _createNotes() {
                 type: 'NoteImg',
                 isPinned: false,
                 info: {
-                    url: 'http://some-img/me',
+                    url: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=989&q=80' ,
                     title: 'Bobi and Me'
                 },
                 style: {
@@ -128,6 +128,18 @@ function _createNotes() {
                     backgroundColor: 'rgb(255, 255, 255)'
                 }
                 
+            },
+            {
+                id: 'n104',
+                type: 'NoteVideo',
+                isPinned: false,
+                info: {
+                    url: "https://www.youtube.com/embed/tgbNymZ7vqY" ,
+                    title: 'Tom n Jerry'
+                },
+                style: {
+                    backgroundColor: 'rgb(255, 255, 255)'
+                }
             }
         ]
     storageService.saveToStorage(NOTE_KEY, notes)

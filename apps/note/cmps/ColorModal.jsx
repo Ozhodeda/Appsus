@@ -29,12 +29,12 @@ const ColorSelectionModal = ({ onSelectColor, note }) => {
 
   return (
     <div>
-      <button onClick={openModal}>Change Color</button>
+      <button onClick={openModal}><img src="../img/color-palette.png" alt="color" /></button>
       {isVisible && (
         <div className="modal">
           {colors.map((color, index) => (
-            <button key={index} onClick={() => onSelectColor(color, note)}>
-              {color}
+            <button className="btn-color" key={index} onClick={() => onSelectColor(color, note)}  style={{ backgroundColor: color }}>
+              O
             </button>
           ))}
           <button onClick={closeModal}>Close</button>

@@ -7,8 +7,8 @@ export function NoteTxt({ note, onContentEdit }) {
 
     return (
         <div>
-            <h4 suppressContentEditableWarning={true} contentEditable="true" onBlur={()=>onContentEdit(event, note.id)}>{title}</h4>
-            <p suppressContentEditableWarning={true} contentEditable="true" className="note-txt">
+            <h4 suppressContentEditableWarning={true} contentEditable="true" onBlur={()=>onContentEdit(event, note.id, 'title')}>{title}</h4>
+            <p suppressContentEditableWarning={true} contentEditable="true" className="note-txt" onBlur={()=>onContentEdit(event, note.id, 'txt')} >
                 {txt}
             </p>
             {/* <NoteEdit noteId={id}/> */}

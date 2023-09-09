@@ -7,8 +7,8 @@ export function NoteImg({note}){
     return (
         <div>
 
-            <h4 suppressContentEditableWarning={true} contentEditable="true">{title}</h4>
-           <img src="{url}" alt="img" /> 
+            <h4 suppressContentEditableWarning={true} contentEditable="true" onBlur={()=>onContentEdit(event, note.id, 'title')}>{title}</h4>
+           <img src={url} alt="img" /> 
         </div>
 
     )
