@@ -13,7 +13,9 @@ export const mailService = {
     save,
     getEmptyMail,
     getDefaultFilter,
-    getDefaultSort
+    getDefaultSort,
+    setReadMail,
+    setUnReadMail
 }
 
 function query(filterBy = {}, sortBy = {}) {
@@ -92,6 +94,20 @@ function save(mail) {
     }
 }
 
+function setReadMail(mailId) {
+    return storageService.get(MAIL_KEY, mailId).then((mail) => {
+        mail.isRead = true
+        return storageService.put(MAIL_KEY, mail)
+    })
+}
+
+function setUnReadMail(mailId) {
+    return storageService.get(MAIL_KEY, mailId).then((mail) => {
+        mail.isRead = false
+        return storageService.put(MAIL_KEY, mail)
+    })
+}
+
 
 function getEmptyMail() {
     return {
@@ -139,7 +155,7 @@ function _createMails() {
             removedAt: null,
             from: 'momo@momo.com',
             to: 'user@appsus.com',
-            isStarred: true,
+            isStarred: false,
             isImportant: false,
             isDraft: false,
             isTrash: false,
@@ -153,11 +169,109 @@ function _createMails() {
             removedAt: null,
             from: 'Apple',
             to: 'user@appsus.com',
+            isStarred: false,
+            isImportant: false,
+            isDraft: false,
+            isTrash: false,
+        },
+        {
+            id: 'e104',
+            subject: 'Thank you for your purchase',
+            body: 'You will find a copy of your transaction details below and a link to the terms which apply. Please print this and keep it in a safe place for future reference. ',
+            isRead: true,
+            sentAt: new Date(),
+            removedAt: null,
+            from: 'PlayStation',
+            to: 'user@appsus.com',
+            isStarred: true,
+            isImportant: true,
+            isDraft: false,
+            isTrash: false,
+        },
+        {
+            id: 'e105',
+            subject: '8 Advanced JavaScript Interview Questions for Senior Roles ',
+            body: 'JavaScript is a powerful language that is one of the primary building blocks of the web. This powerful language also has some of its quirks. For instance, did you know that 0 === -0 evaluates to true, or that Number("") yields 0? ',
+            isRead: true,
+            sentAt: new Date(),
+            removedAt: null,
+            from: 'Medium Daily Digest',
+            to: 'user@appsus.com',
+            isStarred: false,
+            isImportant: true,
+            isDraft: false,
+            isTrash: false,
+        },
+        {
+            id: 'e106',
+            subject: 'Your icloud storage is full',
+            body: 'Hello Oz Hodeda,Your iCloud storage is full. You have exceeded your storage plan and this means that your documents, contacts and device data are no longer being backed up to iCloud. Your photos and videos are also not being uploaded to iCloud Photos. iCloud Drive and iCloud-enabled apps are not being updated across your devices. ',
+            isRead: true,
+            sentAt: new Date(),
+            removedAt: null,
+            from: 'Icloud',
+            to: 'user@appsus.com',
             isStarred: true,
             isImportant: false,
             isDraft: false,
             isTrash: false,
-        }
+        },
+        {
+            id: 'e107',
+            subject: 'Welcome to Tabnine! ',
+            body: 'Tabnine has been successfully installedDuring your 14-day preview, you’ll get Tabnine Pro’s advanced completions.Once your preview is over, you can upgrade or go back to Tabnine’s basic completions. ',
+            isRead: true,
+            sentAt: new Date(),
+            removedAt: null,
+            from: 'Tabnine',
+            to: 'user@appsus.com',
+            isStarred: true,
+            isImportant: true,
+            isDraft: false,
+            isTrash: false,
+        },
+        {
+            id: 'e108',
+            subject: 'Almog and 47 others made changes in your shared folders',
+            body: `Here's what happened in your shared folders last week`,
+            isRead: true,
+            sentAt: new Date(),
+            removedAt: null,
+            from: 'Dropbox',
+            to: 'user@appsus.com',
+            isStarred: false,
+            isImportant: true,
+            isDraft: false,
+            isTrash: false,
+        },
+        {
+            id: 'e109',
+            subject: 'We have for you a new music playlist',
+            body: `Based on the music you've heard recently, we've found a new and exciting playlist for you`,
+            isRead: true,
+            sentAt: new Date(),
+            removedAt: null,
+            from: 'Spotify',
+            to: 'user@appsus.com',
+            isStarred: false,
+            isImportant: false,
+            isDraft: false,
+            isTrash: false,
+        },
+        {
+            id: 'e110',
+            subject: 'ספורט פיטנס 10 - חשבונית',
+            body: 'מצורף לדואר אלקטרוני זה קישור למסמך חשבונית מס קבלה מספר 235',
+            isRead: true,
+            sentAt: new Date(),
+            removedAt: null,
+            from: 'donotreply',
+            to: 'user@appsus.com',
+            isStarred: true,
+            isImportant: false,
+            isDraft: false,
+            isTrash: false,
+        },
         ]
         storageService.saveToStorage(MAIL_KEY, mails)
     }

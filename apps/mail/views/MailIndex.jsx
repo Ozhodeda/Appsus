@@ -5,6 +5,7 @@ import { MailFolderList } from '../cmps/MailFolderList.jsx';
 import { MailHeader } from '../cmps/MailHeader.jsx';
 
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
+import { MailAction } from '../cmps/MailAction.jsx';
 
 const { useState, useEffect } = React
 const { useParams } = ReactRouterDOM
@@ -16,6 +17,7 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [sortBy, setSortBy] = useState(mailService.getDefaultSort())
     const params = useParams()
+
     useEffect(() => {
         console.log('mount')
         mailService.query(filterBy).then(setMails)
@@ -54,17 +56,34 @@ export function MailIndex() {
         setSortBy((prevSortBy) => ({ ...prevSortBy, ...sortBy }))
     }
 
+    function onMarkUnRead(ev,mailId) {
+        {console.log(ev)}
+        console.log('knmvk')
+        if(!ev||!mailId) return
+        mailService.setUnReadMail(mailId).then(loadMails)
+        .then(() => {showSuccessMsg('Mail marked as unread')}).catch((error) => {
+            console.error('Failed to mark unread:', error)
+        })
+    }
+
 
     if (!mails) return (<div className='loader-container'> <div className="loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>)
     return (
+    
         <div className='mail-app-container'>
             <MailHeader onSetFilter={onSetFilter} filterBy={filterBy} />
             <main className='mail-app'>
                 <aside className='mail-folder-list-container'>
-                    <MailFolderList />
+                    <MailFolderList
+                        mails={mails}
+                        onSetFilter={onSetFilter}
+                        filterBy={filterBy} />
                 </aside>
                 {params && Object.keys(params).length > 0 ? (
-                    <MailDetails onRemoveMail={onRemoveMail} filterBy={filterBy} />) : (
+                    <MailDetails
+                        onRemoveMail={onRemoveMail}
+                        filterBy={filterBy}
+                        onMarkUnRead={onMarkUnRead} />) : (
                     <div className='mail-list-container'>
                         <MailList
                             mails={mails}
@@ -73,10 +92,15 @@ export function MailIndex() {
                             onSetFilter={onSetFilter}
                             filterBy={filterBy}
                             onSetSortBy={onSetSortBy}
-                            sortBy={sortBy} />
+                            sortBy={sortBy}
+                            onMarkUnRead={onMarkUnRead} 
+                            />
                     </div>)}
             </main>
         </div>
+
+        
+        
     )
 }
 

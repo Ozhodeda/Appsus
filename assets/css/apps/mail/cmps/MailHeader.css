@@ -1,0 +1,35 @@
+.mail-header{
+    display: flex;
+    background-color: #f6f8fc;
+    
+}
+
+.mail-header .search {
+    background-color: #eaf1fb;
+    border: none;
+   margin-inline-start: 96px;
+   height: 46px;
+   border-radius: 20px;
+   padding-inline-start: 20px;
+   flex-basis: 50%;
+   margin-top: 40px;
+   
+}
+
+.mail-header .search:focus {
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 5px 5px 0px #c1c1c1;
+}
+
+.header-span{
+    margin-top: 70px;
+    font-family:  Arial, Helvetica, sans-serif;
+    
+}
+
+.header-logo{
+    width: 50px ;
+    
+   
+}
