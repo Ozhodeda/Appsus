@@ -7,12 +7,15 @@ const { useState } = React
 export function NoteList({ notes, onRemoveNote, onContentEdit }) {
     const [selectedColor, setSelectedColor] = useState('rgb(255, 255, 255)')
 
-    const handleColorChange = (color) => {
-        console.log(color)
+    // console.log('*/*/*/*/**/*///***/',selectedColor);
+    const handleColorChange = (color, note) => {
+        // console.log('----------------------------',color, note)
         setSelectedColor(color)
+        note.style.backgroundColor = color
     }
-
+    
     function getBgc(note) {
+        // console.log('**********************', note )
         return note.style ? note.style.backgroundColor : 'transparent'
     }
 
@@ -22,7 +25,7 @@ export function NoteList({ notes, onRemoveNote, onContentEdit }) {
             {notes.map(note =>
                 <section style={{ backgroundColor: getBgc(note) }} className="notes" key={note.id}>
                     <NotePreview note={note} onContentEdit={onContentEdit} />
-                    <ColorSelectionModal onSelectColor={handleColorChange} color={selectedColor} />
+                    <ColorSelectionModal onSelectColor={handleColorChange} color={selectedColor} note={note}/>
                     <button onClick={() => onRemoveNote(note.id)}>delete</button>
 
                     {/* <button onClick={openColorModal}>bcg</button> */}

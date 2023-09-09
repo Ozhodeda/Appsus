@@ -1,7 +1,7 @@
 
 const { useState } = React
 
-const ColorSelectionModal = ({ onSelectColor }) => {
+const ColorSelectionModal = ({ onSelectColor, note }) => {
   const [isVisible, setIsVisible] = useState(false)
 
   const colors = [
@@ -33,7 +33,7 @@ const ColorSelectionModal = ({ onSelectColor }) => {
       {isVisible && (
         <div className="modal">
           {colors.map((color, index) => (
-            <button key={index} onClick={() => onSelectColor(color)}>
+            <button key={index} onClick={() => onSelectColor(color, note)}>
               {color}
             </button>
           ))}
