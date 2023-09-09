@@ -1,10 +1,10 @@
-.mail-header{
+.mail-header, .note-header{
     display: flex;
     background-color: #f6f8fc;
     
 }
 
-.mail-header .search {
+.mail-header .search, .note-header .search  {
     background-color: #eaf1fb;
     border: none;
    margin-inline-start: 96px;
@@ -16,7 +16,7 @@
    
 }
 
-.mail-header .search:focus {
+.mail-header .search:focus , .note-header .search:focus{
     background-color: white;
     border: 1px solid #ddd;
     box-shadow: 0px 5px 5px 0px #c1c1c1;

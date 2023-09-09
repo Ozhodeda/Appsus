@@ -7,7 +7,7 @@ export function NoteVideo({note}){
         <div>
 
             <h4 suppressContentEditableWarning={true} contentEditable="true" onBlur={()=>onContentEdit(event, note.id, 'title')}>{title}</h4>
-            <iframe width="210" height="150" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+            <iframe width="210" height="150" src={url}></iframe>
         </div>
 
     )

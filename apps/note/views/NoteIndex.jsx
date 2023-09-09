@@ -3,6 +3,7 @@ import { NoteList } from "../cmps/NoteList.jsx"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import { NoteEdit } from "./NoteEdit.jsx"
 import { NoteFolderList } from "../cmps/NoteFolderList.jsx"
+import { NoteHeader } from "../cmps/NoteHeader.jsx"
 
 // import useOutsideClick from "../../../hooks/use-out-side-click.js"
 
@@ -52,9 +53,9 @@ export function NoteIndex() {
         console.dir(target.innerText)
     }
 
-    // function onSetFilterBy(filterBy) {
-    //     setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
-    // }
+    function onSetFilterBy(filterBy) {
+        setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+    }
 
     // noteService.get(id).then((note) => {
     //     note.info.title = target.innerText
@@ -77,12 +78,15 @@ export function NoteIndex() {
     console.log('render')
     if (!notes) return <div className='loader-container'> <div className="loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
     return (
-        <main className="note-index">
-            <aside className='note-folder-list-container'>
-                <NoteFolderList notes={notes}/>
-            </aside>
-            <NoteEdit notes={notes} />
-            <NoteList notes={notes} onRemoveNote={onRemoveNote} onContentEdit={onContentEdit} />
-        </main>
+        <React.Fragment>
+            <NoteHeader onSetFilter={onSetFilterBy} filterBy={filterBy} />
+            <main className="note-index">
+                <aside className='note-folder-list-container'>
+                    <NoteFolderList notes={notes} />
+                </aside>
+                <NoteEdit notes={notes} />
+                <NoteList notes={notes} onRemoveNote={onRemoveNote} onContentEdit={onContentEdit} />
+            </main>
+        </React.Fragment>
     )
 }

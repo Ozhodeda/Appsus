@@ -21,7 +21,7 @@ const about = <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100
 
     return <header className="app-header">
         <Link to="/">
-            <h3>LOGO!</h3>
+            <h3><img src={'../assets/img/logo.png'} alt="LOGO" /></h3>
         </Link>
         <nav>
             <NavLink to="/">{home}</NavLink>

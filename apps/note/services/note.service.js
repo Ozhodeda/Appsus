@@ -134,7 +134,7 @@ function _createNotes() {
                 type: 'NoteVideo',
                 isPinned: false,
                 info: {
-                    url: "https://www.youtube.com/embed/tgbNymZ7vqY" ,
+                    url: "https://www.youtube-nocookie.com/embed/tgbNymZ7vqY" ,
                     title: 'Tom n Jerry'
                 },
                 style: {
