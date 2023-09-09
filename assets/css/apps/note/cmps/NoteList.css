@@ -1,13 +1,13 @@
  /* note list */
 
- .main-notes{
+ .main-notes {
     columns: 4 220px;
     column-gap: 1em;
     row-gap: 1em;
  }
 
- .notes{
-  border: 1px solid #e0e0e0;
+ .notes {
+    border: 1px solid #e0e0e0;
 
     border-radius: 8px;
 
@@ -19,5 +19,4 @@
  .notes:hover {
     transform: translateY(-5px);
 
-  }
- 
+ }

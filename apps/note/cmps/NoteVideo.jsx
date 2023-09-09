@@ -1,8 +1,7 @@
 
 export function NoteVideo({note}){
-    console.log('NoteVideo')
+    // console.log('NoteVideo')
     const {title, url} = note.info
-    console.log('url', url)
 
     return (
         <div>

@@ -1,5 +1,5 @@
  /* mail list */
- .mails-list-container {
+ .mails-list-container, .main-notes, .note-edit {
     width: 100%;
     margin-inline-start: 40px;
 }

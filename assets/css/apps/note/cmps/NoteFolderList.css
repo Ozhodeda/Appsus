@@ -1,0 +1,63 @@
+.note-folder-list-container {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    /* align-content: center; */
+    /* align-items: center; */
+    height: 100%;
+    width: 40px;
+    background-color: #f6f8fc;
+    z-index: 2;
+}
+
+.note-folder-list-container:hover {
+    transition: all 250ms;
+    width: 150px;
+    box-shadow: 0px 3px 5px 0px #c1c1c1
+}
+
+.note-folder-list-container:hover .note-archive::after {
+    content: ' - Archive';
+}
+
+.note-folder-list-container:hover .note-edit::after {
+    content: ' - Edit';
+}
+
+.note-folder-list-container:hover .note-reminder::after {
+    content: ' - Reminder';
+}
+
+.note-folder-list-container:hover .note-note::after {
+    content: ' - Note';
+}
+
+.note-folder-list-container:hover .note-trash::after {
+    content: ' - Trash';
+}
+
+.note-categories {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.note-categories button {
+    position: relative;
+    height: 30px;
+    margin-inline: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    justify-items: flex-start;
+    padding-inline-end: 20px;
+    border: none;
+}
+
+.note-categories button:hover{
+    background-color: rgba(235, 227, 227, 0.8);
+    
+}
+
+.note-folder-list-container:hover .unselect{
+    border-radius: 0 50px 50px 0;
+}

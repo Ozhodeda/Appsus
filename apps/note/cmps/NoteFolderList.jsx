@@ -1,28 +1,21 @@
 export function NoteFolderList() {
     return (
         <React.Fragment>
-            <button className='compose-note'>
-                <i className="fa-solid fa-pen fa-lg"></i>
-            </button>
             <div className="note-categories">
-
-                <button className="note-inbox" name="inbox">
-                    <i className="fa-solid fa-inbox"></i>
+                <button className="note-note" name="notedNotes">
+                    <i className="fa-regular fa-lightbulb"></i>
                 </button>
 
-                <button className="note-star" name="starredNotes">
-                    <i className="fa-regular fa-star" ></i>
+                <button className="note-reminder" name="reminderNotes">
+                    <i className="fa-regular fa-lightbulb"></i>
                 </button>
 
-                <button className="note-important" name="importantNotes">
-                    <i className="fa-regular fa-bookmark fa-rotate-90"></i>
+                <button className="note-edit" name="editNotes">     
+                    <i className="fa-solid fa-pen fa-lg"></i>
                 </button>
 
-                <button className="note-edit" name="editNotes">
-                    <i className="fa-solid fa-pen fa-lg"></i>                </button>
-
-                <button className="note-draft" name="draftNotes">
-                <img src="https://icons.iconarchive.com/icons/ionic/ionicons/16/archive-outline-icon.png" width="16" height="16"/>
+                <button className="note-archive" name="archiveNotes">
+                    <i className="fa-solid fa-box-archive"></i>
                 </button>
 
                 <button className="note-trash" name="trashNotes">

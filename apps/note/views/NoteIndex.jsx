@@ -2,6 +2,7 @@ import { noteService } from "../services/note.service.js"
 import { NoteList } from "../cmps/NoteList.jsx"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import { NoteEdit } from "./NoteEdit.jsx"
+import { NoteFolderList } from "../cmps/NoteFolderList.jsx"
 
 // import useOutsideClick from "../../../hooks/use-out-side-click.js"
 
@@ -38,10 +39,10 @@ export function NoteIndex() {
 
     function onContentEdit({ target }, id, filed) {
         noteService.get(id).then((note) => {
-            console.log('adsdasdasd',filed);
+            console.log('adsdasdasd', filed);
             note.info[filed] = target.innerText
             noteService.save(note)
-            console.log('noe on content ',note)
+            console.log('noe on content ', note)
         })
 
 
@@ -77,6 +78,9 @@ export function NoteIndex() {
     if (!notes) return <div className='loader-container'> <div className="loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
     return (
         <main className="note-index">
+            <aside className='note-folder-list-container'>
+                <NoteFolderList notes={notes}/>
+            </aside>
             <NoteEdit notes={notes} />
             <NoteList notes={notes} onRemoveNote={onRemoveNote} onContentEdit={onContentEdit} />
         </main>
