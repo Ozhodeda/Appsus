@@ -7,7 +7,7 @@ export function NoteFolderList() {
                 </button>
 
                 <button className="note-reminder" name="reminderNotes">
-                    <i className="fa-regular fa-lightbulb"></i>
+                    <i className="fa-regular fa-bell"></i>
                 </button>
 
                 <button className="note-edit" name="editNotes">     
